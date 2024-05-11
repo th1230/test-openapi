@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "libs",
   "projects": {
     "openapi-test": {
       "projectType": "application",
@@ -90,6 +90,39 @@
               "src/styles.css"
             ],
             "scripts": []
+          }
+        }
+      }
+    },
+    "openapi": {
+      "projectType": "library",
+      "root": "libs/openapi",
+      "sourceRoot": "libs/openapi/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "libs/openapi/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/openapi/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/openapi/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "libs/openapi/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }

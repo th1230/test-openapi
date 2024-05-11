@@ -1,0 +1,4063 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "財金資訊 - 整批作業檔案收送平台 OpenAPI 文件",
+    "description": "整批作業檔案收送平台系統建置專案",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/CertManagement/AssignedCert": {
+      "post": {
+        "tags": [
+          "CertManagement"
+        ],
+        "summary": "取得目標單位(自我/財金)的憑證設定",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CertAssignedReqDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CertAssignedDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "驗證錯誤",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/CertManagement/AssignCert": {
+      "post": {
+        "tags": [
+          "CertManagement"
+        ],
+        "summary": "設定憑證",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CertAssignReqDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "驗證錯誤",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "憑證設定錯誤",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ClientConfigData/SystemData": {
+      "post": {
+        "tags": [
+          "ClientConfigData"
+        ],
+        "summary": "取得系統參數設定",
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientConfigDataInfoDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "查無資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "驗證錯誤",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ClientConfigData/UpdateSystemData": {
+      "post": {
+        "tags": [
+          "ClientConfigData"
+        ],
+        "summary": "設定系統參數",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientConfigDataSystemDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "驗證錯誤",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ClientConfigData/CheckSetupVersion": {
+      "post": {
+        "tags": [
+          "ClientConfigData"
+        ],
+        "summary": "檢查設定版本號碼",
+        "requestBody": {
+          "description": "設定版本資料",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupVersionCheckDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetupVersionDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "查詢錯誤",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Fee/Systems": {
+      "post": {
+        "tags": [
+          "Fee"
+        ],
+        "summary": "取得費用系統清單",
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FeeSystemDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FeeParser/GetFeeList": {
+      "post": {
+        "tags": [
+          "FeeParser"
+        ],
+        "summary": "取得業務資料表中FileType、FeeCode、Memo資料。\r\n例：回傳：000-BAT01、BATO、整批轉帳。",
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeeItemDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FeeParser/GetFeeCodeMemo": {
+      "post": {
+        "tags": [
+          "FeeParser"
+        ],
+        "summary": "取得輸入的FeeCode的中文說明，例：輸入002-DDC03，其中文說明為「代繳代發異動(新)」。",
+        "requestBody": {
+          "description": "檔案檢核所使用的業務代碼，例：002-DDC03",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeCodeMemoSearchDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeCodeMemoSearchDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeCodeMemoSearchDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeeCodeMemoDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FeeParser/GetParserFormatById": {
+      "post": {
+        "tags": [
+          "FeeParser"
+        ],
+        "summary": "根據業務代碼取得 ParserFormat 檢查 Rule。",
+        "requestBody": {
+          "description": "業務代碼",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeParserSearchDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeParserSearchDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeParserSearchDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeeParserFormatDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FeeParser/GetParserFileCheckingbyId": {
+      "post": {
+        "tags": [
+          "FeeParser"
+        ],
+        "summary": "根據業務代碼取得 FileChecking Rule (檢核檔名的檢核規則)",
+        "requestBody": {
+          "description": "業務代碼",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeParserSearchDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeParserSearchDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeParserSearchDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeeParserFileCheckingDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FeeParser/GetParserGlobalCheckingById": {
+      "post": {
+        "tags": [
+          "FeeParser"
+        ],
+        "summary": "根據業務代碼取得 GlobalChecking 檢查 Rule",
+        "requestBody": {
+          "description": "業務代碼",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeParserSearchDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeParserSearchDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeParserSearchDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeeParserGlobalCheckingDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FeeParser/GetParserPropertyListById": {
+      "post": {
+        "tags": [
+          "FeeParser"
+        ],
+        "summary": "根據業務代碼取得 PropertyList 定義",
+        "requestBody": {
+          "description": "業務代碼",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeParserSearchDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeParserSearchDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeParserSearchDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeeParserPropertyListDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FeeParser/GetParserMappingRuleById": {
+      "post": {
+        "tags": [
+          "FeeParser"
+        ],
+        "summary": "根據業務代碼取得 MappingRule 定義",
+        "requestBody": {
+          "description": "業務代碼",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeParserSearchDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeParserSearchDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeParserSearchDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeeParserMappingRuleDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FeeParser/GetReturnCodeDescr": {
+      "post": {
+        "tags": [
+          "FeeParser"
+        ],
+        "summary": "根據 RCode 取得相對應說明",
+        "requestBody": {
+          "description": "回傳碼",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReturnCodeSearchDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReturnCodeSearchDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReturnCodeSearchDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReturnCodeDescrDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FeeParser/GetAllFeeName": {
+      "post": {
+        "tags": [
+          "FeeParser"
+        ],
+        "summary": "取得所有FeeId與其對應的中文說明",
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeeNameDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FeeParser/CheckPackName": {
+      "post": {
+        "tags": [
+          "FeeParser"
+        ],
+        "summary": "依據相關資訊取得封包檔案名稱與相關PackName資料(舊SP：SP_GetPackName)",
+        "requestBody": {
+          "description": "封包檔查詢參數",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PackNameSearchDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PackNameSearchDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PackNameSearchDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Log/GetLog": {
+      "post": {
+        "tags": [
+          "Log"
+        ],
+        "summary": "依序號取得Log",
+        "requestBody": {
+          "description": "序號",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogIdDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogIdDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogIdDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Log/Search": {
+      "post": {
+        "tags": [
+          "Log"
+        ],
+        "summary": "依條件取得Log(以時間倒序排序)",
+        "requestBody": {
+          "description": "從畫面傳回的Log搜尋條件",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogSearchDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogSearchDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogSearchDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Log/AddNewLog": {
+      "post": {
+        "tags": [
+          "Log"
+        ],
+        "summary": "新增一筆Log資訊",
+        "requestBody": {
+          "description": "從畫面來的新Log資料",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogInsertDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogInsertDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogInsertDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Log新增成功",
+            "content": {
+              "text/plain": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/Log/DeleteAllLog": {
+      "post": {
+        "tags": [
+          "Log"
+        ],
+        "summary": "刪除所有Log",
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "text/plain": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/Log/DeleteLog": {
+      "post": {
+        "tags": [
+          "Log"
+        ],
+        "summary": "依序號刪除Log",
+        "requestBody": {
+          "description": "欲刪除的LogId",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogIdDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogIdDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogIdDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "text/plain": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/Log/GetSystemLog": {
+      "post": {
+        "tags": [
+          "Log"
+        ],
+        "summary": "依條件取得 SystemLog (以 LOG_ID 倒序排序)",
+        "parameters": [
+          {
+            "name": "filterCode",
+            "in": "query",
+            "description": "業務別",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lastDays",
+            "in": "query",
+            "description": "最近",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "驗證錯誤",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "查無資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Log/DownloadSystemLog": {
+      "post": {
+        "tags": [
+          "Log"
+        ],
+        "summary": "依條件取得 SystemLog (以 LOG_ID 倒序排序) 並下載",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysLogSearchDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "驗證錯誤",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/File"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "查無資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Log/GetLogMaxSeq": {
+      "post": {
+        "tags": [
+          "Log"
+        ],
+        "summary": "取得Log資料表最大序號(最新一筆紀錄)",
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogMaxSeqDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Log/GetLogListBySeq": {
+      "post": {
+        "tags": [
+          "Log"
+        ],
+        "summary": "依據FeeJobCode取得Log資料",
+        "requestBody": {
+          "description": "業務代碼(FeeJobCode)",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogListSearchDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogListSearchDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogListSearchDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogListDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Log/AddEventLog": {
+      "post": {
+        "tags": [
+          "Log"
+        ],
+        "summary": "新增一筆EventLog資訊(舊：SP_EventLog_Add)",
+        "requestBody": {
+          "description": "EventLog資料",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventLogInsertDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventLogInsertDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventLogInsertDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Log新增成功",
+            "content": {
+              "text/plain": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/System/InitData": {
+      "post": {
+        "tags": [
+          "System"
+        ],
+        "summary": "取得系統初始化資料。各種下載路徑、費用系統等設定",
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemInitDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "驗證錯誤",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Tracking/GetDataTrackingList": {
+      "post": {
+        "tags": [
+          "Tracking"
+        ],
+        "summary": "根據搜尋條件取得資料追蹤列表 (查詢交易動作)",
+        "requestBody": {
+          "description": "搜尋條件",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrackingSearchDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrackingSearchDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrackingSearchDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataTrackingDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Tracking/GetTransactionTrackingList": {
+      "post": {
+        "tags": [
+          "Tracking"
+        ],
+        "summary": "根據搜尋條件取得交易追蹤列表 (依據所設條件列出「通知」、「結果」對應查詢結果)",
+        "parameters": [
+          {
+            "name": "BgnDate",
+            "in": "query",
+            "description": "開始日期",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "description": "結束日期",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "IsFinish",
+            "in": "query",
+            "description": "是否為完成交易(0:未完成, 1:完成)",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "UnFinish",
+            "in": "query",
+            "description": "是否為未完成交易(0:未完成, 1:完成)",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Err",
+            "in": "query",
+            "description": "是否為錯誤交易(0:未完成, 1:完成)",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionTrackingDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Tracking/GetTransListWorkArea": {
+      "post": {
+        "tags": [
+          "Tracking"
+        ],
+        "summary": "依據 單位代號、日期期間，列出符合條件的交易",
+        "requestBody": {
+          "description": "搜尋條件",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransListSearchDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransListSearchDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransListSearchDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransListDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/TransLog/AddTransLog": {
+      "post": {
+        "tags": [
+          "TransLog"
+        ],
+        "summary": "新增交易動作(舊：SP_TransLog_Add)\r\n重複傳送只紀錄一個 交易資料",
+        "requestBody": {
+          "description": "新增TB_TRANSLOG紀錄用資料",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransLogInsertDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransLogInsertDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransLogInsertDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "成功",
+            "content": {
+              "text/plain": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/TransLog/UpdateTransLog": {
+      "post": {
+        "tags": [
+          "TransLog"
+        ],
+        "summary": "更新TransLog狀態相關描述(舊SP：SP_TransLog_Sync)",
+        "requestBody": {
+          "description": "欲更新資料與條件",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransLogUpdateDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransLogUpdateDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransLogUpdateDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "text/plain": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/TransLog/AddTransLogSummary": {
+      "post": {
+        "tags": [
+          "TransLog"
+        ],
+        "summary": "新增TransLog_Summary(舊:SP_TransLog_Summary_Add)，並return 該筆summarySeqNo",
+        "requestBody": {
+          "description": "TB_TRANSLOG_SUMMARY紀錄新增用資料",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransLogSummaryInsertDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransLogSummaryInsertDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransLogSummaryInsertDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "成功",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/TransLog/UpdateTransLogSummary": {
+      "post": {
+        "tags": [
+          "TransLog"
+        ],
+        "summary": "更新TransLog_Summary 狀態相關描述(舊:SP_TransLog_Summary_Sync)",
+        "requestBody": {
+          "description": "欲更新SUMMARY檔(SUM檔)資料",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransLogSummaryUpdateDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransLogSummaryUpdateDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransLogSummaryUpdateDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "text/plain": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/TransLog/KillAllTransLogData": {
+      "post": {
+        "tags": [
+          "TransLog"
+        ],
+        "summary": "清除 tradingDate 之前的所有資料 for HouseKeeping (舊SP:SP_TransLog_Kill)",
+        "requestBody": {
+          "description": "交易日期",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransLogKillDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransLogKillDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransLogKillDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "text/plain": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/TransLog/CleanWorkList": {
+      "post": {
+        "tags": [
+          "TransLog"
+        ],
+        "summary": "設定傳入的檔案名稱不再顯示於工作清單中(舊SP：SP_Clear_WorkList)",
+        "requestBody": {
+          "description": "欲不再顯示於工作清單中的檔案名稱",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkListCleaningDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkListCleaningDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkListCleaningDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "成功",
+            "content": {
+              "text/plain": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/User/Login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "登入",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserLoginDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserTokenDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "驗證錯誤",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未授權",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/User/RefreshToken": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "更新 token",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRefreshTokenDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserTokenDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "驗證錯誤",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/User/ChangeMima": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "修改密碼",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserChgMimaDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "驗證錯誤",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UserManagement/UserList": {
+      "post": {
+        "tags": [
+          "UserManagement"
+        ],
+        "summary": "取得所有使用者",
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserListDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "驗證錯誤",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UserManagement/CreateUser": {
+      "post": {
+        "tags": [
+          "UserManagement"
+        ],
+        "summary": "建立使用者",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreateDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "驗證錯誤",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UserManagement/DeleteUser": {
+      "post": {
+        "tags": [
+          "UserManagement"
+        ],
+        "summary": "移除使用者",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDeleteDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "驗證錯誤",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UserManagement/AuthList": {
+      "post": {
+        "tags": [
+          "UserManagement"
+        ],
+        "summary": "取得使用者費用設定清單",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserAuthDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserAuthListDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "驗證錯誤",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UserManagement/AddAuth": {
+      "post": {
+        "tags": [
+          "UserManagement"
+        ],
+        "summary": "新增使用者費用清單",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserAddAuthDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "驗證錯誤",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UserManagement/ResetMima": {
+      "patch": {
+        "tags": [
+          "UserManagement"
+        ],
+        "summary": "重設使用者密碼",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserResetMimaDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "驗證錯誤",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResultModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CertAssignReqDTO": {
+        "required": [
+          "feeCategoryID",
+          "issuer",
+          "issuerTo",
+          "serialNo",
+          "validDate"
+        ],
+        "type": "object",
+        "properties": {
+          "feeCategoryID": {
+            "minLength": 1,
+            "type": "string",
+            "description": "費用種類 ID"
+          },
+          "isSelfCert": {
+            "type": "boolean",
+            "description": "是否為自我憑證"
+          },
+          "serialNo": {
+            "minLength": 1,
+            "type": "string",
+            "description": "憑證序號"
+          },
+          "issuerTo": {
+            "minLength": 1,
+            "type": "string",
+            "description": "發給"
+          },
+          "issuer": {
+            "minLength": 1,
+            "type": "string",
+            "description": "發行者"
+          },
+          "validDate": {
+            "type": "string",
+            "description": "有效日期",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CertAssignedDTO": {
+        "type": "object",
+        "properties": {
+          "targetClientID": {
+            "type": "string",
+            "nullable": true
+          },
+          "feeCategoryID": {
+            "type": "string",
+            "nullable": true
+          },
+          "serialNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuer": {
+            "type": "string",
+            "nullable": true
+          },
+          "validDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CertAssignedReqDTO": {
+        "required": [
+          "feeCategoryID"
+        ],
+        "type": "object",
+        "properties": {
+          "feeCategoryID": {
+            "minLength": 1,
+            "type": "string",
+            "description": "費用種類 ID"
+          },
+          "isSelfCert": {
+            "type": "boolean",
+            "description": "是否為自我憑證"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClientConfigDataInfoDTO": {
+        "type": "object",
+        "properties": {
+          "ackWaitTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "batchInterval": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "backupKeepDays": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClientConfigDataSystemDTO": {
+        "required": [
+          "ackWaitTime",
+          "backupKeepDays",
+          "batchInterval"
+        ],
+        "type": "object",
+        "properties": {
+          "ackWaitTime": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "回執檔等待時間 (單位:分)",
+            "format": "int32"
+          },
+          "batchInterval": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "自動收發檔案區間 (單位:分)",
+            "format": "int32"
+          },
+          "backupKeepDays": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "作業資料保存天數 (單位:天)",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataTrackingDTO": {
+        "type": "object",
+        "properties": {
+          "logTime": {
+            "type": "string",
+            "description": "建立時間",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": "string",
+            "description": "使用者代碼",
+            "nullable": true
+          },
+          "packageName": {
+            "type": "string",
+            "description": "封包檔名",
+            "nullable": true
+          },
+          "dataName": {
+            "type": "string",
+            "description": "Data ... 內容檔 檔名",
+            "nullable": true
+          },
+          "oFileName": {
+            "type": "string",
+            "description": "原始檔名",
+            "nullable": true
+          },
+          "createDateTime": {
+            "type": "string",
+            "description": "本交易開始時間",
+            "nullable": true
+          },
+          "issueId": {
+            "type": "string",
+            "description": "發文單位代號",
+            "nullable": true
+          },
+          "recvId": {
+            "type": "string",
+            "description": "收文單位代號",
+            "nullable": true
+          },
+          "feeCode": {
+            "type": "string",
+            "description": "轉帳類別，例如：01060",
+            "nullable": true
+          },
+          "bizCode": {
+            "type": "string",
+            "description": "業務別，例如：DDC01",
+            "nullable": true
+          },
+          "dType": {
+            "type": "string",
+            "description": "性質別(通知為1，結果為2，回執為3)",
+            "nullable": true
+          },
+          "upDn": {
+            "type": "string",
+            "description": "傳送別(上傳為U，接收為D)",
+            "nullable": true
+          },
+          "batch": {
+            "type": "string",
+            "description": "批號",
+            "nullable": true
+          },
+          "deductDate": {
+            "type": "string",
+            "description": "交易日期編號",
+            "nullable": true
+          },
+          "tradingDate": {
+            "type": "string",
+            "description": "交易日期",
+            "format": "date-time"
+          },
+          "action": {
+            "type": "integer",
+            "description": "交易狀態\r\n1：產生封包\r\n2：CDFtp已上傳\r\n3：上傳錯誤\r\n4：收到回應錯誤Ack\r\n5：收到回應成功Ack\r\n6：收到封包內容正確\r\n7：收到封包內容正確 產生 OK Ack 封包\r\n8：收到封包內容錯誤 產生 Error Ack 封包\r\n9：CDFtp已上傳OK Ack封包\r\n10：CDFtp已上傳Error Ack封包",
+            "format": "int32",
+            "nullable": true
+          },
+          "rCode": {
+            "type": "string",
+            "description": "回執聯的回傳碼或處理狀態碼(例:若尚未回應：則為C000；若上傳錯誤，則為C999)",
+            "nullable": true
+          },
+          "bCode": {
+            "type": "string",
+            "description": "轉帳類別-業務別",
+            "nullable": true
+          },
+          "sumName": {
+            "type": "string",
+            "description": "Summary檔 檔名",
+            "nullable": true
+          },
+          "descr": {
+            "type": "string",
+            "description": "描述",
+            "nullable": true
+          },
+          "isTimeOut": {
+            "type": "string",
+            "description": "是否逾時",
+            "nullable": true
+          },
+          "processName": {
+            "type": "string",
+            "description": "若flag為3或4，則記錄處理的檔案名稱",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "[資料追蹤]查詢 (交易動作資料：舊SP_TransQueryList回傳資料)-列表DTO"
+      },
+      "ErrorResultModel": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "錯誤訊息",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "錯誤資訊"
+      },
+      "EventLogInsertDTO": {
+        "type": "object",
+        "properties": {
+          "logTime": {
+            "type": "string",
+            "description": "Log紀錄時間",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": "string",
+            "description": "Log時使用的User ID",
+            "nullable": true
+          },
+          "logSource": {
+            "type": "string",
+            "description": "產生Log的Object名稱",
+            "nullable": true
+          },
+          "stateCode": {
+            "type": "string",
+            "description": "Log時的狀態",
+            "nullable": true
+          },
+          "feeCode": {
+            "type": "string",
+            "description": "Log 時的業務別",
+            "nullable": true
+          },
+          "returnCode": {
+            "type": "string",
+            "description": "Return Code",
+            "nullable": true
+          },
+          "descr": {
+            "type": "string",
+            "description": "Log描述",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "用來新增EventLog的Model"
+      },
+      "FeeCodeMemoDTO": {
+        "type": "object",
+        "properties": {
+          "memo": {
+            "type": "string",
+            "description": "FeeCode的中文說明",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "FeeCode的中文說明DTO"
+      },
+      "FeeCodeMemoSearchDTO": {
+        "type": "object",
+        "properties": {
+          "feeCode": {
+            "type": "string",
+            "description": "檔案檢核所使用的業務代碼",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "FeeCode的中文說明搜尋DTO"
+      },
+      "FeeItemDTO": {
+        "type": "object",
+        "properties": {
+          "fileType": {
+            "type": "integer",
+            "description": "費用代號",
+            "format": "int32"
+          },
+          "feeCode": {
+            "type": "string",
+            "description": "費用代號",
+            "nullable": true
+          },
+          "memo": {
+            "type": "string",
+            "description": "費用說明",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "TB_FEE_PARSER撈取費用代號、費用代號、費用說明用DTO"
+      },
+      "FeeNameDTO": {
+        "type": "object",
+        "properties": {
+          "feeId": {
+            "type": "string",
+            "description": "FeeId",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "轉帳類別-業務別",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "FeeId與對應中文說明DTO"
+      },
+      "FeeParserFileCheckingDTO": {
+        "type": "object",
+        "properties": {
+          "seqNo": {
+            "type": "integer",
+            "description": "序號",
+            "format": "int32"
+          },
+          "id": {
+            "type": "string",
+            "description": "費用代號",
+            "nullable": true
+          },
+          "code": {
+            "type": "integer",
+            "description": "使用的檢核方式",
+            "format": "int32",
+            "nullable": true
+          },
+          "param0": {
+            "type": "string",
+            "description": "參數0，記錄檢核開始位置",
+            "nullable": true
+          },
+          "param1": {
+            "type": "string",
+            "description": "參數1，記錄檢核結束位置",
+            "nullable": true
+          },
+          "param2": {
+            "type": "string",
+            "description": "參數2，[code]所需輸入的參數",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "「檔名檢查」資料DTO"
+      },
+      "FeeParserFormatDTO": {
+        "type": "object",
+        "properties": {
+          "seqNo": {
+            "type": "integer",
+            "description": "序號",
+            "format": "int32"
+          },
+          "id": {
+            "type": "string",
+            "description": "費用代號(如: 001 - DDC02)",
+            "nullable": true
+          },
+          "ident": {
+            "type": "string",
+            "description": "區別碼：1:首錄 2:明細錄 3:尾錄",
+            "nullable": true
+          },
+          "startCode": {
+            "type": "integer",
+            "description": "開始位置",
+            "format": "int32",
+            "nullable": true
+          },
+          "endCode": {
+            "type": "integer",
+            "description": "結束位置",
+            "format": "int32",
+            "nullable": true
+          },
+          "code": {
+            "type": "integer",
+            "description": "使用的檢核方式",
+            "format": "int32",
+            "nullable": true
+          },
+          "param": {
+            "type": "string",
+            "description": "[code] 所需輸入的參數",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Parsing Rule 存取DTO，取得所有業務檔案內容欄位(Start~End)的檢查方法。"
+      },
+      "FeeParserGlobalCheckingDTO": {
+        "type": "object",
+        "properties": {
+          "seqNo": {
+            "type": "integer",
+            "description": "序號",
+            "format": "int32"
+          },
+          "id": {
+            "type": "string",
+            "description": "費用代號(如:001-DDC02)",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "description": "使用的檢核方式",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "撈取 所有業務套用整檔檢核GlobalChecking的檢查方法DTO"
+      },
+      "FeeParserMappingRuleDTO": {
+        "type": "object",
+        "properties": {
+          "seqNo": {
+            "type": "integer",
+            "description": "序號",
+            "format": "int32"
+          },
+          "id": {
+            "type": "string",
+            "description": "費用代號(如:001-DDC02)",
+            "nullable": true
+          },
+          "code": {
+            "type": "integer",
+            "description": "使用的檢核方式",
+            "format": "int32",
+            "nullable": true
+          },
+          "param0": {
+            "type": "string",
+            "description": "參數0，記錄檢核開始位置",
+            "nullable": true
+          },
+          "param1": {
+            "type": "string",
+            "description": "參數1，記錄檢核結束位置",
+            "nullable": true
+          },
+          "param2": {
+            "type": "string",
+            "description": "參數2，[code]所需輸入的參數",
+            "nullable": true
+          },
+          "priority": {
+            "type": "integer",
+            "description": "執行優先順序(數字越小愈優先)",
+            "format": "int32",
+            "nullable": true
+          },
+          "mappingCode": {
+            "type": "string",
+            "description": "轉換後費用代號",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "TB_PARSER_MAPPING_RULE資料表撈取用DTO。\r\n針對選單只有一項但是業務別可以選擇許多項目的情形\r\n(如台水異動選單只有『異動』但是可以處理水號異動、帳號異動)，\r\n以便進行初步Parse 找出其真正的業務代碼在進行處理。\r\n目前僅市水、台水異動檔使用。"
+      },
+      "FeeParserPropertyListDTO": {
+        "type": "object",
+        "properties": {
+          "seqNo": {
+            "type": "integer",
+            "description": "序號",
+            "format": "int32"
+          },
+          "id": {
+            "type": "string",
+            "description": "費用代號",
+            "nullable": true
+          },
+          "headIdentS": {
+            "type": "integer",
+            "description": "HeadIdentS",
+            "format": "int32",
+            "nullable": true
+          },
+          "headIdentE": {
+            "type": "integer",
+            "description": "HeadIdentE",
+            "format": "int32",
+            "nullable": true
+          },
+          "headIssueS": {
+            "type": "integer",
+            "description": "HeadIssueS",
+            "format": "int32",
+            "nullable": true
+          },
+          "headIssueE": {
+            "type": "integer",
+            "description": "HeadIssueE",
+            "format": "int32",
+            "nullable": true
+          },
+          "headRecvS": {
+            "type": "integer",
+            "description": "HeadRecvS",
+            "format": "int32",
+            "nullable": true
+          },
+          "headRecvE": {
+            "type": "integer",
+            "description": "HeadRecvE",
+            "format": "int32",
+            "nullable": true
+          },
+          "headDateS": {
+            "type": "integer",
+            "description": "HeadDateS",
+            "format": "int32",
+            "nullable": true
+          },
+          "headDateE": {
+            "type": "integer",
+            "description": "HeadDateE",
+            "format": "int32",
+            "nullable": true
+          },
+          "headTypeS": {
+            "type": "integer",
+            "description": "HeadTypeS",
+            "format": "int32",
+            "nullable": true
+          },
+          "headTypeE": {
+            "type": "integer",
+            "description": "HeadTypeE",
+            "format": "int32",
+            "nullable": true
+          },
+          "headBatchS": {
+            "type": "integer",
+            "description": "HeadBatchS",
+            "format": "int32",
+            "nullable": true
+          },
+          "headBatchE": {
+            "type": "integer",
+            "description": "HeadBatchE",
+            "format": "int32",
+            "nullable": true
+          },
+          "detailIdentS": {
+            "type": "integer",
+            "description": "DetailIdentS",
+            "format": "int32",
+            "nullable": true
+          },
+          "detailIdentE": {
+            "type": "integer",
+            "description": "DetailIdentE",
+            "format": "int32",
+            "nullable": true
+          },
+          "detailIssueS": {
+            "type": "integer",
+            "description": "DetailIssueS",
+            "format": "int32",
+            "nullable": true
+          },
+          "detailIssueE": {
+            "type": "integer",
+            "description": "DetailIssueE",
+            "format": "int32",
+            "nullable": true
+          },
+          "detailRecvS": {
+            "type": "integer",
+            "description": "DetailRecvS",
+            "format": "int32",
+            "nullable": true
+          },
+          "detailRecvE": {
+            "type": "integer",
+            "description": "DetailRecvE",
+            "format": "int32",
+            "nullable": true
+          },
+          "detailDateS": {
+            "type": "integer",
+            "description": "DetailDateS",
+            "format": "int32",
+            "nullable": true
+          },
+          "detailDateE": {
+            "type": "integer",
+            "description": "DetailDateE",
+            "format": "int32",
+            "nullable": true
+          },
+          "detailTypeS": {
+            "type": "integer",
+            "description": "DetailTypeS",
+            "format": "int32",
+            "nullable": true
+          },
+          "detailTypeE": {
+            "type": "integer",
+            "description": "DetailTypeE",
+            "format": "int32",
+            "nullable": true
+          },
+          "tailIdentS": {
+            "type": "integer",
+            "description": "TailIdentS",
+            "format": "int32",
+            "nullable": true
+          },
+          "tailIdentE": {
+            "type": "integer",
+            "description": "TailIdentE",
+            "format": "int32",
+            "nullable": true
+          },
+          "tailIssueS": {
+            "type": "integer",
+            "description": "TailIssueS",
+            "format": "int32",
+            "nullable": true
+          },
+          "tailIssueE": {
+            "type": "integer",
+            "description": "TailIssueE",
+            "format": "int32",
+            "nullable": true
+          },
+          "tailRecvS": {
+            "type": "integer",
+            "description": "TailRecvS",
+            "format": "int32",
+            "nullable": true
+          },
+          "tailRecvE": {
+            "type": "integer",
+            "description": "TailRecvE",
+            "format": "int32",
+            "nullable": true
+          },
+          "tailDateS": {
+            "type": "integer",
+            "description": "TailDateS",
+            "format": "int32",
+            "nullable": true
+          },
+          "tailDateE": {
+            "type": "integer",
+            "description": "TailDateE",
+            "format": "int32",
+            "nullable": true
+          },
+          "tailTypeS": {
+            "type": "integer",
+            "description": "TailTypeS",
+            "format": "int32",
+            "nullable": true
+          },
+          "tailTypeE": {
+            "type": "integer",
+            "description": "TailTypeE",
+            "format": "int32",
+            "nullable": true
+          },
+          "headPropertyS": {
+            "type": "integer",
+            "description": "HeadPropertyS",
+            "format": "int32",
+            "nullable": true
+          },
+          "headPropertyE": {
+            "type": "integer",
+            "description": "HeadPropertyE",
+            "format": "int32",
+            "nullable": true
+          },
+          "detailBatchS": {
+            "type": "integer",
+            "description": "DetailBatchS",
+            "format": "int32",
+            "nullable": true
+          },
+          "detailBatchE": {
+            "type": "integer",
+            "description": "DetailBatchE",
+            "format": "int32",
+            "nullable": true
+          },
+          "detailSerNumS": {
+            "type": "integer",
+            "description": "DetailSerNumS",
+            "format": "int32",
+            "nullable": true
+          },
+          "detailSerNumE": {
+            "type": "integer",
+            "description": "DetailSerNumE",
+            "format": "int32",
+            "nullable": true
+          },
+          "identFlag": {
+            "type": "integer",
+            "description": "若值為1，則檢核「區別碼」欄位需同檔一致；若值為0，則檢核「區別碼」同群一致。",
+            "format": "int32",
+            "nullable": true
+          },
+          "issueFlag": {
+            "type": "integer",
+            "description": "若值為1，則檢核「發件單位」欄位需同檔一致；若值為0，則檢核「發件單位」同群一致。",
+            "format": "int32",
+            "nullable": true
+          },
+          "recvFlag": {
+            "type": "integer",
+            "description": "若值為1，則檢核「收件單位」欄位需同檔一致；若值為0，則檢核「收件單位」同群一致。",
+            "format": "int32",
+            "nullable": true
+          },
+          "dateFlag": {
+            "type": "integer",
+            "description": "若值為1，則檢核「交易日期」欄位需同檔一致；若值為0，則檢核「交易日期」同群一致。",
+            "format": "int32",
+            "nullable": true
+          },
+          "typeFlag": {
+            "type": "integer",
+            "description": "若值為1，則檢核「轉帳類別」欄位需同檔一致；若值為0，則檢核「轉帳類別」同群一致。",
+            "format": "int32",
+            "nullable": true
+          },
+          "propertyFlag": {
+            "type": "integer",
+            "description": "若值為1，則檢核「性質別」欄位需同檔一致；若值為0，則檢核「性質別」同群一致。",
+            "format": "int32",
+            "nullable": true
+          },
+          "batchFlag": {
+            "type": "integer",
+            "description": "若值為1，則檢核「批號」欄位需同檔一致；若值為0，則檢核「批號」同群一致。",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "撈取 Parsing Rule 的資料表，\r\n主要紀錄所有業務如何Parser出每種業務的特殊值(如: HeadIdent、HeadIssue等)所需Pasrse 的位址"
+      },
+      "FeeParserSearchDTO": {
+        "type": "object",
+        "properties": {
+          "feeId": {
+            "type": "string",
+            "description": "業務代碼",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "以業務代碼(FeeId)搜尋資料用DTO"
+      },
+      "FeeSystemDTO": {
+        "type": "object",
+        "properties": {
+          "feeSystemID": {
+            "type": "string",
+            "description": "費用種類 ID",
+            "nullable": true
+          },
+          "feeSystemName": {
+            "type": "string",
+            "description": "費用種類名稱",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "File": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Int32OptionModel": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "顯示文字",
+            "nullable": true
+          },
+          "value": {
+            "type": "integer",
+            "description": "值",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "選項物件"
+      },
+      "LogDTO": {
+        "type": "object",
+        "properties": {
+          "logId": {
+            "type": "integer",
+            "description": "序號",
+            "format": "int32"
+          },
+          "feeJobCode": {
+            "type": "integer",
+            "description": "預設為null",
+            "format": "int32",
+            "nullable": true
+          },
+          "logTime": {
+            "type": "string",
+            "description": "Log紀錄時間",
+            "format": "date-time"
+          },
+          "createrId": {
+            "type": "string",
+            "description": "Token中UserId",
+            "nullable": true
+          },
+          "clientId": {
+            "type": "string",
+            "description": "Token中UserId",
+            "nullable": true
+          },
+          "userId": {
+            "type": "string",
+            "description": "使用者代號",
+            "nullable": true
+          },
+          "logSource": {
+            "type": "string",
+            "description": "Log時使用的模組",
+            "nullable": true
+          },
+          "stateCode": {
+            "type": "string",
+            "description": "Log時的狀態",
+            "nullable": true
+          },
+          "feeCode": {
+            "type": "string",
+            "description": "Log 時的業務別",
+            "nullable": true
+          },
+          "returnCode": {
+            "type": "string",
+            "description": "回傳碼",
+            "nullable": true
+          },
+          "descr": {
+            "type": "string",
+            "description": "描述",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "傳送Log資料至前端的DTO"
+      },
+      "LogIdDTO": {
+        "type": "object",
+        "properties": {
+          "logId": {
+            "type": "integer",
+            "description": "LogId",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "LogId的DTO"
+      },
+      "LogInsertDTO": {
+        "type": "object",
+        "properties": {
+          "feeJobCode": {
+            "type": "integer",
+            "description": "預設為null",
+            "format": "int32",
+            "nullable": true
+          },
+          "logTime": {
+            "type": "string",
+            "description": "Log紀錄時間",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": "string",
+            "description": "Log時使用的User ID",
+            "nullable": true
+          },
+          "logSource": {
+            "type": "string",
+            "description": "產生Log的Object名稱",
+            "nullable": true
+          },
+          "stateCode": {
+            "type": "string",
+            "description": "Log時的狀態",
+            "nullable": true
+          },
+          "feeCode": {
+            "type": "string",
+            "description": "Log 時的業務別",
+            "nullable": true
+          },
+          "returnCode": {
+            "type": "string",
+            "description": "Return Code",
+            "nullable": true
+          },
+          "descr": {
+            "type": "string",
+            "description": "Log描述",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "用來新增Log的Model"
+      },
+      "LogListDTO": {
+        "type": "object",
+        "properties": {
+          "descr": {
+            "type": "string",
+            "description": "Log紀錄描述",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Log紀錄描述DTO"
+      },
+      "LogListSearchDTO": {
+        "type": "object",
+        "properties": {
+          "feeJobCode": {
+            "type": "integer",
+            "description": "業務代碼",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "FeeJobCode查詢Log資料用DTO"
+      },
+      "LogMaxSeqDTO": {
+        "type": "object",
+        "properties": {
+          "maxSeq": {
+            "type": "integer",
+            "description": "TB_LOG資料表SeqNo最大序號",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "最大序號DTO"
+      },
+      "LogSearchDTO": {
+        "type": "object",
+        "properties": {
+          "feeJobCode": {
+            "type": "integer",
+            "description": "預設為null",
+            "format": "int32",
+            "nullable": true
+          },
+          "logTimeStart": {
+            "type": "string",
+            "description": "Log紀錄時間起始範圍",
+            "format": "date-time",
+            "nullable": true
+          },
+          "logTimeEnd": {
+            "type": "string",
+            "description": "Log紀錄時間結束範圍",
+            "format": "date-time",
+            "nullable": true
+          },
+          "userId": {
+            "type": "string",
+            "description": "使用者代號",
+            "nullable": true
+          },
+          "logSource": {
+            "type": "string",
+            "description": "Log時使用的模組",
+            "nullable": true
+          },
+          "stateCode": {
+            "type": "string",
+            "description": "Log時的狀態",
+            "nullable": true
+          },
+          "feeCode": {
+            "type": "string",
+            "description": "Log 時的業務別",
+            "nullable": true
+          },
+          "returnCode": {
+            "type": "string",
+            "description": "回傳碼",
+            "nullable": true
+          },
+          "takeCnt": {
+            "type": "integer",
+            "description": "取得LOG總筆數，預設為100",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "前端傳回的Log搜尋條件"
+      },
+      "PackNameSearchDTO": {
+        "type": "object",
+        "properties": {
+          "issueId": {
+            "type": "string",
+            "description": "發文單位代號",
+            "nullable": true
+          },
+          "recvId": {
+            "type": "string",
+            "description": "收文單位代號",
+            "nullable": true
+          },
+          "feeCode": {
+            "type": "string",
+            "description": "轉帳類別",
+            "nullable": true
+          },
+          "bizCode": {
+            "type": "string",
+            "description": "業務別，ex：DDC01",
+            "nullable": true
+          },
+          "dType": {
+            "type": "string",
+            "description": "性質別(通知為1，結果為2，回執為3)",
+            "nullable": true
+          },
+          "batchNo": {
+            "type": "string",
+            "description": "批號",
+            "nullable": true
+          },
+          "tradingDate": {
+            "type": "string",
+            "description": "交易日期",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "description": "封包檔名查詢DTO"
+      },
+      "ReturnCodeDescrDTO": {
+        "type": "object",
+        "properties": {
+          "descr": {
+            "type": "string",
+            "description": "回傳代碼中文描述",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "回傳代碼描述DTO"
+      },
+      "ReturnCodeSearchDTO": {
+        "type": "object",
+        "properties": {
+          "rCode": {
+            "type": "string",
+            "description": "ReturnCode",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "以ReturnCode搜尋資料用DTO"
+      },
+      "SetupVersionCheckDTO": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "版本號碼",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "檢查設定版本號碼"
+      },
+      "SetupVersionDTO": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "版本號碼",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "設定版本號碼DTO"
+      },
+      "StringOptionModel": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "顯示文字",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "description": "值",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "選項物件"
+      },
+      "SysLogSearchDTO": {
+        "required": [
+          "lastDays"
+        ],
+        "type": "object",
+        "properties": {
+          "filterCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastDays": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SystemFeeBusinessDTO": {
+        "type": "object",
+        "properties": {
+          "systemId": {
+            "type": "string",
+            "nullable": true
+          },
+          "businessId": {
+            "type": "string",
+            "nullable": true
+          },
+          "businessName": {
+            "type": "string",
+            "nullable": true
+          },
+          "subBusinesses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SystemFeeSubBusinessDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SystemFeeSubBusinessDTO": {
+        "type": "object",
+        "properties": {
+          "systemId": {
+            "type": "string",
+            "nullable": true
+          },
+          "businessId": {
+            "type": "string",
+            "nullable": true
+          },
+          "subBusinessId": {
+            "type": "string",
+            "nullable": true
+          },
+          "subBusinessName": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameRule": {
+            "type": "string",
+            "nullable": true
+          },
+          "dType": {
+            "type": "string",
+            "nullable": true
+          },
+          "upDn": {
+            "type": "string",
+            "nullable": true
+          },
+          "menu": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SystemFeeSystemDTO": {
+        "type": "object",
+        "properties": {
+          "systemId": {
+            "type": "string",
+            "nullable": true
+          },
+          "systemName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ftpPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "businesses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SystemFeeBusinessDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SystemInitDTO": {
+        "type": "object",
+        "properties": {
+          "fiscId": {
+            "type": "string",
+            "nullable": true
+          },
+          "fiscName": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataRootPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "backupPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "uploadPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "uploadSumPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "uploadBackupPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "downloadPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "downloadSumPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "downloadBackupPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "downloadAckPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "downloadOthersPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "tempWorkPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "zipPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "dummyPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "feeSystems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SystemFeeSystemDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TrackingSearchDTO": {
+        "type": "object",
+        "properties": {
+          "bgnDate": {
+            "type": "string",
+            "description": "開始日期",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "description": "結束日期",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isFinish": {
+            "type": "integer",
+            "description": "是否為完成交易(0:未完成, 1:完成)",
+            "format": "int32"
+          },
+          "unFinish": {
+            "type": "integer",
+            "description": "是否為未完成交易(0:未完成, 1:完成)",
+            "format": "int32"
+          },
+          "err": {
+            "type": "integer",
+            "description": "是否為錯誤交易(0:未完成, 1:完成)",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "資料追蹤列表搜尋條件"
+      },
+      "TransListDTO": {
+        "type": "object",
+        "properties": {
+          "logTime": {
+            "type": "string",
+            "description": "建立時間",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": "string",
+            "description": "使用者代碼",
+            "nullable": true
+          },
+          "packageName": {
+            "type": "string",
+            "description": "封包檔名",
+            "nullable": true
+          },
+          "receiptPackageName": {
+            "type": "string",
+            "description": "回執時的封包名稱",
+            "nullable": true
+          },
+          "oFileName": {
+            "type": "string",
+            "description": "原始檔名",
+            "nullable": true
+          },
+          "createDateTime": {
+            "type": "string",
+            "description": "本交易開始時間",
+            "nullable": true
+          },
+          "issueId": {
+            "type": "string",
+            "description": "發文單位代號",
+            "nullable": true
+          },
+          "recvId": {
+            "type": "string",
+            "description": "收文單位代號",
+            "nullable": true
+          },
+          "feeCode": {
+            "type": "string",
+            "description": "轉帳類別，例如：01060",
+            "nullable": true
+          },
+          "bizCode": {
+            "type": "string",
+            "description": "業務別，例如：DDC01",
+            "nullable": true
+          },
+          "dType": {
+            "type": "string",
+            "description": "性質別(通知為1，結果為2，回執為3)",
+            "nullable": true
+          },
+          "batchNo": {
+            "type": "string",
+            "description": "批號",
+            "nullable": true
+          },
+          "upDn": {
+            "type": "string",
+            "description": "傳送別(上傳為U，接收為D)",
+            "nullable": true
+          },
+          "deductDate": {
+            "type": "string",
+            "description": "交易日期編號",
+            "nullable": true
+          },
+          "tradingDate": {
+            "type": "string",
+            "description": "交易日期",
+            "format": "date-time",
+            "nullable": true
+          },
+          "action": {
+            "type": "integer",
+            "description": "交易狀態\r\n1：產生封包\r\n2：CDFtp已上傳\r\n3：上傳錯誤\r\n4：收到回應錯誤Ack\r\n5：收到回應成功Ack\r\n6：收到封包內容正確\r\n7：收到封包內容正確 產生 OK Ack 封包\r\n8：收到封包內容錯誤 產生 Error Ack 封包\r\n9：CDFtp已上傳OK Ack封包\r\n10：CDFtp已上傳Error Ack封包",
+            "format": "int32",
+            "nullable": true
+          },
+          "rCode": {
+            "type": "string",
+            "description": "回執聯的回傳碼或處理狀態碼(例:若尚未回應：則為C000；若上傳錯誤，則為C999)",
+            "nullable": true
+          },
+          "descr": {
+            "type": "string",
+            "description": "描述",
+            "nullable": true
+          },
+          "bCode": {
+            "type": "string",
+            "description": "轉帳類別-業務別",
+            "nullable": true
+          },
+          "transDescription": {
+            "type": "string",
+            "description": "交易動作描述(e.g. 產生封包)",
+            "nullable": true
+          },
+          "receiptOFileName": {
+            "type": "string",
+            "description": "回執時的原始檔名",
+            "nullable": true
+          },
+          "isTimeOut": {
+            "type": "string",
+            "description": "是否逾時",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "SP：SP_TransList_WorkArea資料用DTO"
+      },
+      "TransListSearchDTO": {
+        "type": "object",
+        "properties": {
+          "beginDate": {
+            "type": "string",
+            "description": "開始日期",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "description": "結束日期",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "SP：SP_TransList_WorkArea資料查詢參數用DTO"
+      },
+      "TransLogInsertDTO": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "使用者代碼",
+            "nullable": true
+          },
+          "packageName": {
+            "type": "string",
+            "description": "封包名稱",
+            "nullable": true
+          },
+          "dataName": {
+            "type": "string",
+            "description": "資料檔名(Package 內的 Data 檔名)",
+            "nullable": true
+          },
+          "sumName": {
+            "type": "string",
+            "description": "Sum 檔 檔名",
+            "nullable": true
+          },
+          "oFileName": {
+            "type": "string",
+            "description": "原始檔名",
+            "nullable": true
+          },
+          "createDateTime": {
+            "type": "string",
+            "description": "本資料產生時間",
+            "nullable": true
+          },
+          "issueId": {
+            "type": "string",
+            "description": "發文單位代號",
+            "nullable": true
+          },
+          "recvId": {
+            "type": "string",
+            "description": "收文單位代號",
+            "nullable": true
+          },
+          "feeCode": {
+            "type": "string",
+            "description": "轉帳類別，ex:01060",
+            "nullable": true
+          },
+          "bizCode": {
+            "type": "string",
+            "description": "業務別，ex:DDC01",
+            "nullable": true
+          },
+          "dType": {
+            "type": "string",
+            "description": "性質別(通知為1，結果為2，回執為3)",
+            "nullable": true
+          },
+          "upDn": {
+            "type": "string",
+            "description": "傳送別(上傳為U，接收為D)",
+            "nullable": true
+          },
+          "batchNo": {
+            "type": "string",
+            "description": "批號",
+            "nullable": true
+          },
+          "deductDate": {
+            "type": "string",
+            "description": "處理日期",
+            "nullable": true
+          },
+          "tradingDate": {
+            "type": "string",
+            "description": "交易日期",
+            "format": "date-time"
+          },
+          "action": {
+            "type": "integer",
+            "description": "動作碼(交易狀態)\r\n1：產生封包\r\n2：CDFtp已上傳\r\n3：上傳錯誤\r\n4：收到回應錯誤Ack\r\n5：收到回應成功Ack\r\n6：收到封包內容正確\r\n7：收到封包內容正確 產生 OK Ack 封包\r\n8：收到封包內容錯誤 產生 Error Ack 封包\r\n9：CDFtp已上傳OK Ack封包\r\n10：CDFtp已上傳Error Ack封包",
+            "format": "int32"
+          },
+          "flag": {
+            "type": "integer",
+            "description": "狀態碼：\"1:新增\",\"2:重送\",\"3:覆蓋\",\"4:刪除\"",
+            "format": "int32"
+          },
+          "rCode": {
+            "type": "string",
+            "description": "回傳碼",
+            "nullable": true
+          },
+          "descr": {
+            "type": "string",
+            "description": "描述",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "新增交易紀錄(TB_TRANSLOG)用DTO"
+      },
+      "TransLogKillDTO": {
+        "type": "object",
+        "properties": {
+          "tradingDate": {
+            "type": "string",
+            "description": "交易日期",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "description": "交易紀錄刪除DTO"
+      },
+      "TransLogSummaryInsertDTO": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "使用者代碼",
+            "nullable": true
+          },
+          "dataName": {
+            "type": "string",
+            "description": "資料檔名(Package 內的 Data 檔名)",
+            "nullable": true
+          },
+          "issueId": {
+            "type": "string",
+            "description": "發文單位代號",
+            "nullable": true
+          },
+          "recvId": {
+            "type": "string",
+            "description": "收文單位代號",
+            "nullable": true
+          },
+          "feeCode": {
+            "type": "string",
+            "description": "轉帳類別，ex:01060",
+            "nullable": true
+          },
+          "bizCode": {
+            "type": "string",
+            "description": "業務別，ex:DDC01",
+            "nullable": true
+          },
+          "batchNo": {
+            "type": "string",
+            "description": "批號",
+            "nullable": true
+          },
+          "deductDate": {
+            "type": "string",
+            "description": "處理日期",
+            "nullable": true
+          },
+          "tradingDate": {
+            "type": "string",
+            "description": "交易日期",
+            "format": "date-time"
+          },
+          "sumName": {
+            "type": "string",
+            "description": "Sum 檔 檔名",
+            "nullable": true
+          },
+          "flag": {
+            "type": "integer",
+            "description": "狀態碼：\"1:新增\",\"2:重送\",\"3:覆蓋\",\"4:刪除\"",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "新增資料至TB_TRANSLOG_SUMMARY用DTO"
+      },
+      "TransLogSummaryUpdateDTO": {
+        "type": "object",
+        "properties": {
+          "summarySeqNo": {
+            "type": "integer",
+            "description": "Sum 檔 序號",
+            "format": "int32"
+          },
+          "sumName": {
+            "type": "string",
+            "description": "Sum 檔 檔名",
+            "nullable": true
+          },
+          "originalDescr": {
+            "type": "string",
+            "description": "原始 說明",
+            "nullable": true
+          },
+          "updateDescr": {
+            "type": "string",
+            "description": "最新更新說明",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "更新 Sum 檔 資料用 DTO"
+      },
+      "TransLogUpdateDTO": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "使用者代號",
+            "nullable": true
+          },
+          "packageName": {
+            "type": "string",
+            "description": "封包檔名",
+            "nullable": true
+          },
+          "issueId": {
+            "type": "string",
+            "description": "發文單位",
+            "nullable": true
+          },
+          "recvId": {
+            "type": "string",
+            "description": "收文單位",
+            "nullable": true
+          },
+          "feeCode": {
+            "type": "string",
+            "description": "轉帳類別",
+            "nullable": true
+          },
+          "bizCode": {
+            "type": "string",
+            "description": "業務別(ex:DDC01)",
+            "nullable": true
+          },
+          "dType": {
+            "type": "string",
+            "description": "性質別(通知為1，結果為2，回執為3)",
+            "nullable": true
+          },
+          "batchNo": {
+            "type": "string",
+            "description": "批號",
+            "nullable": true
+          },
+          "deductDate": {
+            "type": "string",
+            "description": "交易日期編號",
+            "nullable": true
+          },
+          "action": {
+            "type": "integer",
+            "description": "動作碼\r\n1：產生封包\r\n2：CDFtp已上傳\r\n3：上傳錯誤\r\n4：收到回應錯誤Ack\r\n5：收到回應成功Ack\r\n6：收到封包內容正確\r\n7：收到封包內容正確 產生 OK Ack 封包\r\n8：收到封包內容錯誤 產生 Error Ack 封包\r\n9：CDFtp已上傳OK Ack封包\r\n10：CDFtp已上傳Error Ack封包",
+            "format": "int32"
+          },
+          "rCode": {
+            "type": "string",
+            "description": "回執聯的回傳碼或處理狀態碼(ex:若尚未回應：則為C000；若上傳錯誤，則為C999)",
+            "nullable": true
+          },
+          "descr": {
+            "type": "string",
+            "description": "描述",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "更新TransLog狀態資料DTO"
+      },
+      "TransactionTrackingDTO": {
+        "type": "object",
+        "properties": {
+          "feeType": {
+            "type": "string",
+            "description": "0:費用類別",
+            "nullable": true
+          },
+          "tradingDate": {
+            "type": "string",
+            "description": "1:交易日期",
+            "format": "date-time",
+            "nullable": true
+          },
+          "packageName": {
+            "type": "string",
+            "description": "2:檔案名稱",
+            "nullable": true
+          },
+          "notificationBatch": {
+            "type": "string",
+            "description": "3:通知批號",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "description": "4:通知狀態",
+            "nullable": true
+          },
+          "resultPackageName": {
+            "type": "string",
+            "description": "5:結果檔名",
+            "nullable": true
+          },
+          "resultBatch": {
+            "type": "string",
+            "description": "6:結果批號",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "交易追蹤-列表DTO"
+      },
+      "UserAddAuthDTO": {
+        "required": [
+          "subBusinessIdList",
+          "userID"
+        ],
+        "type": "object",
+        "properties": {
+          "userID": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "subBusinessIdList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserAuthDTO": {
+        "required": [
+          "userID"
+        ],
+        "type": "object",
+        "properties": {
+          "userID": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserAuthListDTO": {
+        "type": "object",
+        "properties": {
+          "availableAuths": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StringOptionModel"
+            },
+            "nullable": true
+          },
+          "userAuths": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StringOptionModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserChgMimaDTO": {
+        "required": [
+          "newMima",
+          "oldMima"
+        ],
+        "type": "object",
+        "properties": {
+          "oldMima": {
+            "minLength": 1,
+            "type": "string",
+            "description": "舊密碼"
+          },
+          "newMima": {
+            "minLength": 1,
+            "type": "string",
+            "description": "新密碼"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserCreateDTO": {
+        "required": [
+          "confirmMima",
+          "mima",
+          "role",
+          "userID"
+        ],
+        "type": "object",
+        "properties": {
+          "role": {
+            "$ref": "#/components/schemas/UserRole"
+          },
+          "userID": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "mima": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "confirmMima": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserDeleteDTO": {
+        "required": [
+          "userID"
+        ],
+        "type": "object",
+        "properties": {
+          "userID": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserInfoDTO": {
+        "type": "object",
+        "properties": {
+          "userID": {
+            "type": "string",
+            "nullable": true
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "$ref": "#/components/schemas/UserRole"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserListDTO": {
+        "type": "object",
+        "properties": {
+          "userRoles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Int32OptionModel"
+            },
+            "nullable": true
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserInfoDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserLoginDTO": {
+        "required": [
+          "mima",
+          "userID"
+        ],
+        "type": "object",
+        "properties": {
+          "userID": {
+            "minLength": 1,
+            "type": "string",
+            "description": "使用者 ID"
+          },
+          "mima": {
+            "minLength": 1,
+            "type": "string",
+            "description": "使用者密碼"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserRefreshTokenDTO": {
+        "required": [
+          "accessToken",
+          "refreshToken"
+        ],
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "minLength": 1,
+            "type": "string",
+            "description": "AccessToken"
+          },
+          "refreshToken": {
+            "minLength": 1,
+            "type": "string",
+            "description": "RefreshToken"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserResetMimaDTO": {
+        "required": [
+          "confirmMima",
+          "mima",
+          "userID"
+        ],
+        "type": "object",
+        "properties": {
+          "userID": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "mima": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "confirmMima": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserRole": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "description": "使用者角色",
+        "format": "int32"
+      },
+      "UserTokenDTO": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "refreshToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "userID": {
+            "type": "string",
+            "nullable": true
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "clientID": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WorkListCleaningDTO": {
+        "type": "object",
+        "properties": {
+          "packageName": {
+            "type": "string",
+            "description": "上傳、下載檔案名稱",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "欲不再顯示於工作清單中的檔案名稱DTO"
+      }
+    }
+  }
+}
